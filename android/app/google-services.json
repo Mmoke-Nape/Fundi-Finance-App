@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "726454897287",
+    "project_id": "fundi-finance-app",
+    "storage_bucket": "fundi-finance-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726454897287:android:b1108355ddfbb067588622",
+        "android_client_info": {
+          "package_name": "com.example.finance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726454897287-9a7gfjakd8ju1all57tp1ree854adetc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkLqfONnGTcVXGc5mgeGFz7IOiVZp6O_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726454897287-9a7gfjakd8ju1all57tp1ree854adetc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
