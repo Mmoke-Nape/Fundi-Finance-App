@@ -1,6 +1,11 @@
+import 'package:finance_app/screens/Authentication/forgot%20password/forgot_password.dart';
 import 'package:finance_app/screens/Authentication/landing/landingScreen.dart';
 import 'package:finance_app/screens/Authentication/signup/signup.dart';
+import 'package:finance_app/screens/Authentication/signup/utils.dart';
+import 'package:finance_app/screens/Home/home.dart';
 import 'package:finance_app/screens/User%20Profile/user_profile.dart';
+import 'package:finance_app/screens/settings/settings_screen.dart';
+import 'package:finance_app/topLevel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -53,7 +58,7 @@ class MyApp extends StatelessWidget {
             Locale('en', ''), // English, no country code
           ],
           debugShowCheckedModeBanner: false,
-
+          scaffoldMessengerKey: Utils.messengerKey,
           // Use AppLocalizations to configure the correct application title
           // depending on the user's locale.
           //
@@ -78,10 +83,18 @@ class MyApp extends StatelessWidget {
 
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
+          // home: const ForgotPasswordScreen(),
+          // home: const HomeScreen(),
+          home: const SettingsScreen(),
+          // home: const TopLevel(),
           // home: const LandingScreen(),
-          home: const UserProfile(),
+          // home: const UserProfile(),
 
           getPages: [
+            GetPage(
+              name: AppRoutes.topLevelRoute,
+              page: () => const TopLevel(),
+            ),
             GetPage(
               name: AppRoutes.signUpRoute,
               page: () => const SignUpScreen(),
@@ -89,18 +102,33 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: AppRoutes.loginRoute,
-              page: () => LoginScreen(),
+              page: () => const LoginScreen(),
               title: 'Login to your account',
             ),
             GetPage(
               name: AppRoutes.verifyRoute,
-              page: () => VerificationScreen(),
+              page: () => const VerificationScreen(),
               title: 'Verify your account',
+            ),
+            GetPage(
+              name: AppRoutes.forgotPasswordRoute,
+              page: () => const ForgotPasswordScreen(),
+              title: 'Forgot Password',
+            ),
+            GetPage(
+              name: AppRoutes.homeRoute,
+              page: () => const HomeScreen(),
+              title: 'Home',
             ),
             GetPage(
               name: AppRoutes.userProfileRoute,
               page: () => const UserProfile(),
               title: 'Your Profile',
+            ),
+            GetPage(
+              name: AppRoutes.settingsRoute,
+              page: () => const SettingsScreen(),
+              title: 'Settings',
             ),
           ],
         );

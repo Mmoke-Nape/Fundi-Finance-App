@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:finance_app/constants/app_colors.dart';
 import 'package:finance_app/constants/app_routes.dart';
+import 'package:finance_app/screens/Authentication/signup/utils.dart';
 import 'package:finance_app/widgets/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +29,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
+  Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.orange,
+            ),
+          );
+        });
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      Utils.showSnackBar(e.message);
+    }
+
+    Get.offAllNamed(AppRoutes.homeRoute);
   }
 
   @override
@@ -77,6 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 20),
                 Form(
+                  key: formKey,
                   child: Column(
                     children: [
                       const SizedBox(height: 10),
@@ -149,11 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             : null,
                       ),
                       const SizedBox(height: 30),
-                      CustomAppButton(text: 'Next', press: signIn
-                          //  () {
-                          //   Get.toNamed(AppRoutes.verifyRoute);
-                          // },
-                          ),
+                      CustomAppButton(text: 'Next', press: signUp),
                       const SizedBox(height: 50),
                       Container(
                         width: size.width,
